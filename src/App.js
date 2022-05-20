@@ -14,7 +14,7 @@ function App() {
     <UserProvider>
       <Header />
       <Routes>
-        <Route path="/" element={<HomeScreen />} />
+        <Route path="/" element={<LoginScreen />} />
         <Route
           path="/home"
           element={

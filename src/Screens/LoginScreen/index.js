@@ -47,17 +47,19 @@ export default function SignIn() {
 
   const [error, setError] = useState("");
 
-  async function onSubmit() {
+  async function onSubmit(event) {
+    const { username, password } = event.target.elements;
+    console.log(username + " - " + password);
     try {
       setError("");
       const { data: user } = await signIn({
-        username,
-        password,
+        username: username.value,
+        password: password.value,
       });
 
       setUser(user);
 
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       setError(err);
     }
@@ -73,7 +75,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={onSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -81,11 +83,9 @@ export default function SignIn() {
             fullWidth
             id="email"
             label="Email Address"
-            name="email"
+            name="username"
             autoComplete="email"
             autoFocus
-            value={username}
-            onChange={(e) => setUsername(e.targer.value)}
           />
           <TextField
             variant="outlined"
@@ -97,8 +97,6 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.targer.value)}
           />
           <Button
             type="submit"
@@ -106,7 +104,6 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={onSubmit}
           >
             Sign In
           </Button>
