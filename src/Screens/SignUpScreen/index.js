@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
+import { useNavigate } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -55,6 +57,10 @@ export default function SignUp() {
         username: email.value,
         password: password.value,
       });
+      alert('Usuario creado, redireccionando en 2 seg...')
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     } catch (err) {
       setError(err);
     }

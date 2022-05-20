@@ -45,20 +45,21 @@ export default function SignIn() {
   const [error, setError] = useState("");
 
   async function onSubmit(event) {
-    const { username, password } = event.target.elements;
-    try {
+    event.preventeDefault();
+    console.log('asdasd')
+   /*  try {
       setError("");
       const { data: user } = await signIn({
         username: username.value,
         password: password.value,
       });
 
-      setUser(user);
+      //setUser(user);
 
-      navigate("/home");
+      //navigate("/home");
     } catch (err) {
       setError(err);
-    }
+    } */
   }
 
   return (
