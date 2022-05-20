@@ -43,13 +43,17 @@ export default function SignUp() {
   async function onSubmit(event) {
     event.preventDefault();
 
+    const { firstName, lastName, username, email, password } =
+      event.target.elements;
+
     try {
       setError("");
       const { data: user } = await signUp({
-        firstName,
-        lastName,
-        username,
-        password,
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+        username: email.value,
+        password: password.value,
       });
     } catch (err) {
       setError(err);
@@ -66,7 +70,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={onSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -89,6 +93,17 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="uname"
               />
             </Grid>
             <Grid item xs={12}>

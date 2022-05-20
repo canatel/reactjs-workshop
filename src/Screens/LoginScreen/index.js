@@ -42,14 +42,10 @@ export default function SignIn() {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
   const [error, setError] = useState("");
 
   async function onSubmit(event) {
     const { username, password } = event.target.elements;
-    console.log(username + " - " + password);
     try {
       setError("");
       const { data: user } = await signIn({
@@ -82,9 +78,8 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Username"
             name="username"
-            autoComplete="email"
             autoFocus
           />
           <TextField
