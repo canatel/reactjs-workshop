@@ -7,6 +7,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
   table: {
@@ -34,39 +35,49 @@ export default function TaskTable(props) {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow className={classes.headerTable}>
-            <TableCell className={classes.headerTitle}>Creation Date</TableCell>
-            <TableCell className={classes.headerTitle}>
-              Task Descrtiption
-            </TableCell>
-            <TableCell className={classes.headerTitle}>Is Completed?</TableCell>
-            <TableCell className={classes.headerTitle}>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <TableRow
-              key={row.name}
-              className={row.completed && classes.isCompletedRow}
-            >
-              <TableCell component="th" scope="row">
-                {row.date}
+      {data.length > 0 ? (
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow className={classes.headerTable}>
+              <TableCell className={classes.headerTitle}>
+                Creation Date
               </TableCell>
-              <TableCell>{row.description}</TableCell>
-              <TableCell>
-                {row.completed ? "Completed" : "Uncompleted"}
+              <TableCell className={classes.headerTitle}>
+                Task Descrtiption
               </TableCell>
-              <TableCell>
-                <a href="#">Delete</a>
-                <br />
-                {!row.completed && <a href="#">Complete</a>}
+              <TableCell className={classes.headerTitle}>
+                Is Completed?
               </TableCell>
+              <TableCell className={classes.headerTitle}>Actions</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {data.map((row) => (
+              <TableRow
+                key={row.name}
+                className={row.completed && classes.isCompletedRow}
+              >
+                <TableCell component="th" scope="row">
+                  {row.date}
+                </TableCell>
+                <TableCell>{row.description}</TableCell>
+                <TableCell>
+                  {row.completed ? "Completed" : "Uncompleted"}
+                </TableCell>
+                <TableCell>
+                  <a href="#">Delete</a>
+                  <br />
+                  {!row.completed && <a href="#">Complete</a>}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      ) : (
+        <Typography component="h1" variant="h5">
+          There Are no Tasks to show
+        </Typography>
+      )}
     </TableContainer>
   );
 }
