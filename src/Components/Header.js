@@ -57,7 +57,9 @@ export default function MenuAppBar() {
           </Typography>
           {user && (
             <div>
-              <Typography variant="p">Logged Username</Typography>
+              <Typography variant="p">
+                {user.name + " " + user.last_name}
+              </Typography>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"

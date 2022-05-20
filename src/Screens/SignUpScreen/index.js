@@ -37,31 +37,28 @@ export default function SignUp() {
   const classes = useStyles();
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
   async function onSubmit(event) {
     event.preventDefault();
 
-    const { firstName, lastName, username, email, password } =
-      event.target.elements;
+    const { firstName, lastName, email, password } = event.target.elements;
 
     try {
       setError("");
       const { data: user } = await signUp({
-        firstName: firstName.value,
-        lastName: lastName.value,
+        name: firstName.value,
+        last_name: lastName.value,
         email: email.value,
-        username: email.value,
         password: password.value,
       });
-      alert('Usuario creado, redireccionando en 2 seg...')
+      alert("You have been reistered, redirecting to login in 2 secs...");
       setTimeout(() => {
         navigate("/");
       }, 2000);
     } catch (err) {
+      password.value.length >= 6
+        ? alert("Some error ocurred, please try again later")
+        : alert("The password must contain at least 6 characters");
       setError(err);
     }
   }
@@ -99,17 +96,6 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                autoComplete="uname"
               />
             </Grid>
             <Grid item xs={12}>

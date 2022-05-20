@@ -1,6 +1,6 @@
 import http from "./http";
 
-import { setSession } from "../auth";
+import { getSession } from "../auth";
 
 export async function signIn({ email, password }) {
   return http

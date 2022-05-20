@@ -42,19 +42,15 @@ export default function SignIn() {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
   const [error, setError] = useState("");
 
   async function onSubmit(event) {
     event.preventDefault();
     const { username, password } = event.target.elements;
-    console.log(username + " - " + password);
     try {
       setError("");
       const { data: user } = await signIn({
-        username: username.value,
+        email: username.value,
         password: password.value,
       });
 
@@ -62,6 +58,7 @@ export default function SignIn() {
 
       navigate("/home");
     } catch (err) {
+      alert(err);
       setError(err);
     }
   }
