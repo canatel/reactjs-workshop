@@ -4,7 +4,7 @@ import { setSession } from "../auth";
 
 export async function signIn({ username, password }) {
   return http
-    .post(`/users/signin`, { email: username, passoword:password })
+    .post(`/users/signin`, { email: username, password:password })
     .then(({ data: json }) => {
       setSession(json.meta.token);
 

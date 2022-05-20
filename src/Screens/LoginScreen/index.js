@@ -42,24 +42,28 @@ export default function SignIn() {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   const [error, setError] = useState("");
 
   async function onSubmit(event) {
-    event.preventeDefault();
-    console.log('asdasd')
-   /*  try {
+    event.preventDefault();
+    const { username, password } = event.target.elements;
+    console.log(username + " - " + password);
+    try {
       setError("");
       const { data: user } = await signIn({
         username: username.value,
         password: password.value,
       });
 
-      //setUser(user);
+      setUser(user);
 
-      //navigate("/home");
+      navigate("/home");
     } catch (err) {
       setError(err);
-    } */
+    }
   }
 
   return (
@@ -79,8 +83,9 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Username"
+            label="Email Address"
             name="username"
+            autoComplete="email"
             autoFocus
           />
           <TextField
